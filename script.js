@@ -13,21 +13,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const cursor = document.getElementById('cursor');
     const follower = document.getElementById('cursor-follower');
 
-    let mouseX = 0, mouseY = 0;
-    let followerX = 0, followerY = 0;
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let followerX = mouseX;
+    let followerY = mouseY;
 
-    // Track mouse movement across the viewport
     document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
 
-        // Main inner cursor dot follows cursor instantly
         if (cursor) {
             cursor.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
         }
     });
 
-    // Smooth physics trailing animation loop for outer cursor circle
     function animateFollower() {
         followerX += (mouseX - followerX) * 0.15;
         followerY += (mouseY - followerY) * 0.15;
@@ -40,8 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     animateFollower();
 
-    // Custom hover scaling for clickable elements
-    const hoverables = document.querySelectorAll('a, button, .project-card, .skill-category-card, .cert-card, .philosophy-card, .timeline-content');
+    const hoverables = document.querySelectorAll('a, button, .project-card, .skill-category-card, .cert-card, .philosophy-card');
     hoverables.forEach((el) => {
         el.addEventListener('mouseenter', () => {
             if (follower) follower.classList.add('cursor-hover');
@@ -54,7 +52,106 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ==========================================
-    // 3. SCROLL PROGRESS INDICATOR
+    // 3. ENHANCED VIBRANT NEON NETWORK BG
+    // ==========================================
+    let canvas = document.getElementById('interactive-bg-canvas');
+    if (!canvas) {
+        canvas = document.createElement('canvas');
+        canvas.id = 'interactive-bg-canvas';
+        canvas.style.position = 'fixed';
+        canvas.style.top = '0';
+        canvas.style.left = '0';
+        canvas.style.width = '100%';
+        canvas.style.height = '100%';
+        canvas.style.pointerEvents = 'none';
+        canvas.style.zIndex = '-1';
+        document.body.prepend(canvas);
+    }
+
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+    });
+
+    // Higher particle density & faster base movement
+    const numParticles = Math.floor((width * height) / 10000);
+    const particles = [];
+
+    for (let i = 0; i < numParticles; i++) {
+        particles.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            vx: (Math.random() - 0.5) * 1.2,
+            vy: (Math.random() - 0.5) * 1.2,
+            radius: Math.random() * 2.5 + 2
+        });
+    }
+
+    function renderNetwork() {
+        ctx.clearRect(0, 0, width, height);
+
+        for (let i = 0; i < particles.length; i++) {
+            let p = particles[i];
+
+            p.x += p.vx;
+            p.y += p.vy;
+
+            if (p.x < 0 || p.x > width) p.vx *= -1;
+            if (p.y < 0 || p.y > height) p.vy *= -1;
+
+            // Glowing Blue Nodes
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = '#3b82f6';
+            ctx.shadowColor = '#60a5fa';
+            ctx.shadowBlur = 8;
+            ctx.fill();
+
+            // Inter-node Connection Lines
+            for (let j = i + 1; j < particles.length; j++) {
+                let p2 = particles[j];
+                let dx = p.x - p2.x;
+                let dy = p.y - p2.y;
+                let dist = Math.sqrt(dx * dx + dy * dy);
+
+                if (dist < 140) {
+                    ctx.beginPath();
+                    ctx.moveTo(p.x, p.y);
+                    ctx.lineTo(p2.x, p2.y);
+                    ctx.strokeStyle = `rgba(59, 130, 246, ${0.45 * (1 - dist / 140)})`;
+                    ctx.lineWidth = 1.2;
+                    ctx.shadowBlur = 0;
+                    ctx.stroke();
+                }
+            }
+
+            // Magnetic Mouse Connections & Highlight Lines
+            let mouseDx = p.x - mouseX;
+            let mouseDy = p.y - mouseY;
+            let mouseDist = Math.sqrt(mouseDx * mouseDx + mouseDy * mouseDy);
+
+            if (mouseDist < 180) {
+                ctx.beginPath();
+                ctx.moveTo(p.x, p.y);
+                ctx.lineTo(mouseX, mouseY);
+                ctx.strokeStyle = `rgba(96, 165, 250, ${0.7 * (1 - mouseDist / 180)})`;
+                ctx.lineWidth = 1.8;
+                ctx.shadowColor = '#60a5fa';
+                ctx.shadowBlur = 6;
+                ctx.stroke();
+            }
+        }
+
+        requestAnimationFrame(renderNetwork);
+    }
+    renderNetwork();
+
+    // ==========================================
+    // 4. SCROLL PROGRESS INDICATOR
     // ==========================================
     const progressBar = document.getElementById('scroll-progress');
     window.addEventListener('scroll', () => {
@@ -66,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ==========================================
-    // 4. HEADER NAVIGATION & MOBILE MENU TOGGLE
+    // 5. HEADER SHADOW & MOBILE MENU TOGGLE
     // ==========================================
     const header = document.getElementById('header');
     window.addEventListener('scroll', () => {
@@ -86,22 +183,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Close mobile nav when clicking a link
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            if (navLinks && navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
-                if (mobileToggle) mobileToggle.classList.remove('active');
-            }
-        });
-    });
-
     // ==========================================
-    // 5. ANIMATED NUMERICAL COUNTERS (KPIs)
+    // 6. ANIMATED NUMERICAL COUNTERS (KPIs)
     // ==========================================
     const counters = document.querySelectorAll('.kpi-num[data-count]');
-    const observerOptions = { threshold: 0.5 };
-
     const counterObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -114,7 +199,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 function updateCount(currentTime) {
                     const elapsedTime = currentTime - startTime;
                     const progress = Math.min(elapsedTime / duration, 1);
-                    // Exponential ease-out equation
                     const currentValue = (1 - Math.pow(2, -10 * progress)) * endValue;
 
                     target.textContent = currentValue.toFixed(decimals);
@@ -130,12 +214,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 observer.unobserve(target);
             }
         });
-    }, observerOptions);
+    }, { threshold: 0.5 });
 
     counters.forEach(counter => counterObserver.observe(counter));
 
     // ==========================================
-    // 6. HERO SECTION CHART.JS PREVIEW
+    // 7. HERO SECTION CHART.JS PREVIEW
     // ==========================================
     const heroCtx = document.getElementById('heroChart');
     if (heroCtx && typeof Chart !== 'undefined') {
@@ -144,47 +228,30 @@ document.addEventListener('DOMContentLoaded', () => {
             data: {
                 labels: ['Q1', 'Q2', 'Q3', 'Q4', 'Q1 (Next)'],
                 datasets: [{
-                    label: 'Performance Metrics',
+                    label: 'Performance Index',
                     data: [65, 78, 85, 92, 98],
                     borderColor: '#3b82f6',
                     backgroundColor: 'rgba(59, 130, 246, 0.1)',
                     borderWidth: 2,
                     fill: true,
                     tension: 0.4,
-                    pointBackgroundColor: '#3b82f6',
-                    pointBorderColor: '#ffffff',
-                    pointRadius: 4
+                    pointBackgroundColor: '#3b82f6'
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false },
-                    tooltip: {
-                        backgroundColor: '#0f172a',
-                        titleColor: '#f8fafc',
-                        bodyColor: '#94a3b8',
-                        borderColor: '#1e293b',
-                        borderWidth: 1
-                    }
-                },
+                plugins: { legend: { display: false } },
                 scales: {
-                    x: {
-                        grid: { color: 'rgba(255, 255, 255, 0.05)' },
-                        ticks: { color: '#94a3b8', font: { family: 'JetBrains Mono' } }
-                    },
-                    y: {
-                        grid: { color: 'rgba(255, 255, 255, 0.05)' },
-                        ticks: { color: '#94a3b8', font: { family: 'JetBrains Mono' } }
-                    }
+                    x: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#94a3b8' } },
+                    y: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#94a3b8' } }
                 }
             }
         });
     }
 
     // ==========================================
-    // 7. PROJECT CASE STUDY MODAL DIALOGS
+    // 8. CASE STUDY MODALS
     // ==========================================
     const openBtns = document.querySelectorAll('.open-modal-btn');
     const closeBtns = document.querySelectorAll('.modal-close');
@@ -215,32 +282,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeModal();
-    });
-
     // ==========================================
-    // 8. DYNAMIC SVG BACKGROUND CANVAS GENERATOR
-    // ==========================================
-    const svgCanvas = document.getElementById('data-canvas');
-    if (svgCanvas) {
-        const width = window.innerWidth;
-        const height = window.innerHeight;
-        svgCanvas.setAttribute('viewBox', `0 0 ${width} ${height}`);
-
-        let nodesHTML = '';
-        const nodeCount = Math.floor(width / 90);
-        for (let i = 0; i < nodeCount; i++) {
-            const cx = Math.random() * width;
-            const cy = Math.random() * height;
-            const r = Math.random() * 2 + 1;
-            nodesHTML += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="rgba(59, 130, 246, 0.15)" />`;
-        }
-        svgCanvas.innerHTML = nodesHTML;
-    }
-
-    // ==========================================
-    // 9. AUTOMATIC FOOTER YEAR UPDATER
+    // 9. AUTOMATIC FOOTER YEAR
     // ==========================================
     const yearSpan = document.getElementById('year');
     if (yearSpan) {
