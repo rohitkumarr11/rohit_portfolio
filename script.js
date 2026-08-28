@@ -85,9 +85,9 @@ document.addEventListener('DOMContentLoaded', () => {
         particles.push({
             x: Math.random() * width,
             y: Math.random() * height,
-            vx: (Math.random() - 0.5) * 0.5,
-            vy: (Math.random() - 0.5) * 0.5,
-            radius: Math.random() * 1.8 + 1
+            vx: (Math.random() - 0.5) * 0.4,
+            vy: (Math.random() - 0.5) * 0.4,
+            radius: Math.random() * 1.5 + 1
         });
     }
 
@@ -103,15 +103,13 @@ document.addEventListener('DOMContentLoaded', () => {
             if (p.x < 0 || p.x > width) p.vx *= -1;
             if (p.y < 0 || p.y > height) p.vy *= -1;
 
-            // Soft subtle nodes (reduced shadow & opacity)
+            // Soft light nodes matching palette
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(59, 130, 246, 0.45)';
-            ctx.shadowColor = 'rgba(59, 130, 246, 0.2)';
-            ctx.shadowBlur = 4;
+            ctx.fillStyle = 'rgba(43, 84, 126, 0.3)';
             ctx.fill();
 
-            // Subtle inter-node connection lines
+            // Inter-node connection lines
             for (let j = i + 1; j < particles.length; j++) {
                 let p2 = particles[j];
                 let dx = p.x - p2.x;
@@ -122,10 +120,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     ctx.beginPath();
                     ctx.moveTo(p.x, p.y);
                     ctx.lineTo(p2.x, p2.y);
-                    // Reduced max line opacity to 0.18 for visual balance
-                    ctx.strokeStyle = `rgba(59, 130, 246, ${0.18 * (1 - dist / 110)})`;
+                    ctx.strokeStyle = `rgba(43, 84, 126, ${0.12 * (1 - dist / 110)})`;
                     ctx.lineWidth = 0.8;
-                    ctx.shadowBlur = 0;
                     ctx.stroke();
                 }
             }
@@ -139,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.beginPath();
                 ctx.moveTo(p.x, p.y);
                 ctx.lineTo(mouseX, mouseY);
-                ctx.strokeStyle = `rgba(59, 130, 246, ${0.35 * (1 - mouseDist / 140)})`;
+                ctx.strokeStyle = `rgba(43, 84, 126, ${0.25 * (1 - mouseDist / 140)})`;
                 ctx.lineWidth = 1;
                 ctx.stroke();
             }
@@ -150,15 +146,34 @@ document.addEventListener('DOMContentLoaded', () => {
     renderNetwork();
 
     // ==========================================
-    // 4. SCROLL PROGRESS INDICATOR
+    // 4. SCROLL PROGRESS INDICATOR & ACTIVE NAV LINK
     // ==========================================
     const progressBar = document.getElementById('scroll-progress');
+    const sections = document.querySelectorAll('section[id]');
+    const navLinkEls = document.querySelectorAll('.nav-link');
+
     window.addEventListener('scroll', () => {
         const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
         const progress = (window.scrollY / totalHeight) * 100;
         if (progressBar) {
             progressBar.style.width = `${progress}%`;
         }
+
+        let currentSection = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 120;
+            const sectionHeight = section.offsetHeight;
+            if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                currentSection = section.getAttribute('id');
+            }
+        });
+
+        navLinkEls.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${currentSection}`) {
+                link.classList.add('active');
+            }
+        });
     });
 
     // ==========================================
@@ -179,6 +194,13 @@ document.addEventListener('DOMContentLoaded', () => {
         mobileToggle.addEventListener('click', () => {
             navLinks.classList.toggle('active');
             mobileToggle.classList.toggle('active');
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileToggle.classList.remove('active');
+            });
         });
     }
 
@@ -218,7 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
     counters.forEach(counter => counterObserver.observe(counter));
 
     // ==========================================
-    // 7. HERO SECTION CHART.JS PREVIEW
+    // 7. CHARTS (HERO & PROJECT 02 PREVIEW)
     // ==========================================
     const heroCtx = document.getElementById('heroChart');
     if (heroCtx && typeof Chart !== 'undefined') {
@@ -229,12 +251,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 datasets: [{
                     label: 'Performance Index',
                     data: [65, 78, 85, 92, 98],
-                    borderColor: '#3b82f6',
-                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    borderColor: '#2B547E',
+                    backgroundColor: 'rgba(43, 84, 126, 0.08)',
                     borderWidth: 2,
                     fill: true,
                     tension: 0.4,
-                    pointBackgroundColor: '#3b82f6'
+                    pointBackgroundColor: '#2B547E'
                 }]
             },
             options: {
@@ -242,8 +264,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 maintainAspectRatio: false,
                 plugins: { legend: { display: false } },
                 scales: {
-                    x: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#94a3b8' } },
-                    y: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#94a3b8' } }
+                    x: { grid: { color: 'rgba(0, 0, 0, 0.04)' }, ticks: { color: '#5A5E66' } },
+                    y: { grid: { color: 'rgba(0, 0, 0, 0.04)' }, ticks: { color: '#5A5E66' } }
+                }
+            }
+        });
+    }
+
+    const proj1Ctx = document.getElementById('project1Chart');
+    if (proj1Ctx && typeof Chart !== 'undefined') {
+        new Chart(proj1Ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Mumbai', 'Delhi', 'Bengaluru', 'Chennai', 'Hyderabad'],
+                datasets: [{
+                    label: 'Sales Vol (Units)',
+                    data: [420, 380, 290, 210, 190],
+                    backgroundColor: 'rgba(43, 84, 126, 0.75)',
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { grid: { display: false }, ticks: { color: '#8C9099', font: { size: 10 } } },
+                    y: { grid: { color: 'rgba(0, 0, 0, 0.04)' }, ticks: { color: '#8C9099', font: { size: 10 } } }
                 }
             }
         });
@@ -280,6 +327,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (e.target === backdrop) closeModal();
         });
     }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeModal();
+    });
 
     // ==========================================
     // 9. AUTOMATIC FOOTER YEAR
