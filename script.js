@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ==========================================
-    // 3. ENHANCED VIBRANT NEON NETWORK BG
+    // 3. ELEGANT BALANCED NETWORK BG (NON-DISTRACTING)
     // ==========================================
     let canvas = document.getElementById('interactive-bg-canvas');
     if (!canvas) {
@@ -77,17 +77,17 @@ document.addEventListener('DOMContentLoaded', () => {
         height = canvas.height = window.innerHeight;
     });
 
-    // Higher particle density & faster base movement
-    const numParticles = Math.floor((width * height) / 10000);
+    // Balanced density & softer movement velocity
+    const numParticles = Math.floor((width * height) / 18000);
     const particles = [];
 
     for (let i = 0; i < numParticles; i++) {
         particles.push({
             x: Math.random() * width,
             y: Math.random() * height,
-            vx: (Math.random() - 0.5) * 1.2,
-            vy: (Math.random() - 0.5) * 1.2,
-            radius: Math.random() * 2.5 + 2
+            vx: (Math.random() - 0.5) * 0.5,
+            vy: (Math.random() - 0.5) * 0.5,
+            radius: Math.random() * 1.8 + 1
         });
     }
 
@@ -103,45 +103,44 @@ document.addEventListener('DOMContentLoaded', () => {
             if (p.x < 0 || p.x > width) p.vx *= -1;
             if (p.y < 0 || p.y > height) p.vy *= -1;
 
-            // Glowing Blue Nodes
+            // Soft subtle nodes (reduced shadow & opacity)
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-            ctx.fillStyle = '#3b82f6';
-            ctx.shadowColor = '#60a5fa';
-            ctx.shadowBlur = 8;
+            ctx.fillStyle = 'rgba(59, 130, 246, 0.45)';
+            ctx.shadowColor = 'rgba(59, 130, 246, 0.2)';
+            ctx.shadowBlur = 4;
             ctx.fill();
 
-            // Inter-node Connection Lines
+            // Subtle inter-node connection lines
             for (let j = i + 1; j < particles.length; j++) {
                 let p2 = particles[j];
                 let dx = p.x - p2.x;
                 let dy = p.y - p2.y;
                 let dist = Math.sqrt(dx * dx + dy * dy);
 
-                if (dist < 140) {
+                if (dist < 110) {
                     ctx.beginPath();
                     ctx.moveTo(p.x, p.y);
                     ctx.lineTo(p2.x, p2.y);
-                    ctx.strokeStyle = `rgba(59, 130, 246, ${0.45 * (1 - dist / 140)})`;
-                    ctx.lineWidth = 1.2;
+                    // Reduced max line opacity to 0.18 for visual balance
+                    ctx.strokeStyle = `rgba(59, 130, 246, ${0.18 * (1 - dist / 110)})`;
+                    ctx.lineWidth = 0.8;
                     ctx.shadowBlur = 0;
                     ctx.stroke();
                 }
             }
 
-            // Magnetic Mouse Connections & Highlight Lines
+            // Interactive mouse connections
             let mouseDx = p.x - mouseX;
             let mouseDy = p.y - mouseY;
             let mouseDist = Math.sqrt(mouseDx * mouseDx + mouseDy * mouseDy);
 
-            if (mouseDist < 180) {
+            if (mouseDist < 140) {
                 ctx.beginPath();
                 ctx.moveTo(p.x, p.y);
                 ctx.lineTo(mouseX, mouseY);
-                ctx.strokeStyle = `rgba(96, 165, 250, ${0.7 * (1 - mouseDist / 180)})`;
-                ctx.lineWidth = 1.8;
-                ctx.shadowColor = '#60a5fa';
-                ctx.shadowBlur = 6;
+                ctx.strokeStyle = `rgba(59, 130, 246, ${0.35 * (1 - mouseDist / 140)})`;
+                ctx.lineWidth = 1;
                 ctx.stroke();
             }
         }
