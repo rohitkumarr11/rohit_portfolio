@@ -1,0 +1,734 @@
+<<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rohit Kumar — Data Analyst Portfolio</title>
+    <meta name="description" content="Portfolio of Rohit Kumar, a Data Science undergraduate focused on data analytics, SQL, Python, Excel, Power BI, visualization, and business intelligence.">
+    
+    <!-- Open Graph Metadata -->
+    <meta property="og:title" content="Rohit Kumar — Data Analyst Portfolio">
+    <meta property="og:description" content="Data Science undergraduate turning complex datasets into clear decisions and visual stories.">
+    <meta property="og:type" content="website">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:italic@0;1&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons & Chart.js CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Dynamic SVG Data Canvas Background -->
+    <svg id="data-canvas" aria-hidden="true"></svg>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor" id="cursor"></div>
+    <div class="custom-cursor-follower" id="cursor-follower"></div>
+
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress-bar" id="scroll-progress"></div>
+
+    <!-- Navigation -->
+    <header class="header" id="header">
+        <nav class="nav-container">
+            <a href="#hero" class="brand-logo">
+                <span class="brand-name">ROHIT KUMAR</span>
+                <span class="brand-sub">DATA × ART</span>
+            </a>
+
+            <div class="nav-links" id="nav-links">
+                <a href="#work" class="nav-link">Work</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#journey" class="nav-link">Journey</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+
+            <div class="nav-actions">
+                <a href="assets/resume/Rohit_Kumar_Resume.pdf" target="_blank" class="btn btn-outline nav-btn">
+                    <span>Resume</span>
+                    <i data-lucide="download"></i>
+                </a>
+                <a href="https://github.com/rohitkumarr11" target="_blank" aria-label="GitHub" class="social-icon-link">
+                    <i data-lucide="github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/rohityadav84" target="_blank" aria-label="LinkedIn" class="social-icon-link">
+                    <i data-lucide="linkedin"></i>
+                </a>
+                <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Menu">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    
+                    <!-- Profile Image -->
+                    <div class="profile-image-wrapper" style="margin-bottom: 1.5rem;">
+                        <img src="assets/images/profile.jpg" alt="Rohit Kumar" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent, #3b82f6);">
+                    </div>
+
+                    <div class="status-pill">
+                        <span class="status-dot"></span>
+                        <span>Open to Data Analyst Internships</span>
+                    </div>
+                    <p class="tagline-label">DATA × VISUAL STORYTELLING</p>
+                    <h1 class="hero-title">
+                        I turn data into<br>
+                        <span class="serif-accent">clear decisions</span><br>
+                        and visual stories.
+                    </h1>
+                    <p class="hero-description">
+                        I'm Rohit Kumar, a Data Science undergraduate focused on data analytics, business intelligence, and turning messy data into meaningful insights.
+                    </p>
+                    <div class="hero-cta-group">
+                        <a href="#work" class="btn btn-primary">
+                            <span>View My Work</span>
+                            <i data-lucide="arrow-down-right"></i>
+                        </a>
+                        <a href="assets/resume/Rohit_Kumar_Resume.pdf" target="_blank" class="btn btn-secondary">
+                            <span>Download Resume</span>
+                            <i data-lucide="file-text"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-card-preview">
+                        <div class="card-header-meta">
+                            <span class="meta-label">LIVE SYSTEM PREVIEW</span>
+                            <span class="meta-code">AXIS [X: 8.39 CGPA]</span>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="heroChart"></canvas>
+                        </div>
+                        <div class="hero-card-footer">
+                            <div class="mini-kpi">
+                                <span class="kpi-num" data-count="1250">0</span>
+                                <span class="kpi-lab">Processed Queries</span>
+                            </div>
+                            <div class="mini-kpi">
+                                <span class="kpi-num" data-count="8.39" data-decimals="2">0.00</span>
+                                <span class="kpi-lab">Academic CGPA</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="#about" class="scroll-indicator" aria-label="Scroll Down">
+                <span>SCROLL</span>
+                <i data-lucide="arrow-down"></i>
+            </a>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section-padding">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-num">01 / ABOUT</span>
+                    <h2 class="section-title">Curious about numbers.<br><span class="serif-accent">Obsessed with clarity.</span></h2>
+                </div>
+                <div class="grid-2-col about-grid">
+                    <div class="about-text">
+                        <p class="lead-text">
+                            I like taking messy datasets, finding the story inside them, and turning that story into something people can actually understand.
+                        </p>
+                        <p>
+                            Currently pursuing my Bachelor of Computer Applications (BCA) with specialization in Data Science at <strong>SRM Institute of Science and Technology</strong> (CGPA: 8.39 / 10). My work centers on building reliable database schemas, conducting rigorous exploratory data analysis, and translating analytical raw data into dynamic executive dashboards.
+                        </p>
+                        <p>
+                            Outside of raw query optimization and metrics, I have an interest in digital art visual composition and sketching. This dual perspective enables me to structure datasets with mathematical accuracy while designing visual reports that communicate effortlessly.
+                        </p>
+                    </div>
+                    <div class="about-visual-pipeline">
+                        <div class="pipeline-card">
+                            <div class="pipeline-step">
+                                <span class="step-num">01</span>
+                                <span class="step-title">RAW DATA</span>
+                                <span class="step-line"></span>
+                            </div>
+                            <div class="pipeline-step">
+                                <span class="step-num">02</span>
+                                <span class="step-title">CLEAN & STRUCTURE</span>
+                                <span class="step-line"></span>
+                            </div>
+                            <div class="pipeline-step">
+                                <span class="step-num">03</span>
+                                <span class="step-title">EXPLORE & MODEL</span>
+                                <span class="step-line"></span>
+                            </div>
+                            <div class="pipeline-step step-active">
+                                <span class="step-num">04</span>
+                                <span class="step-title">VISUAL STORY</span>
+                                <span class="step-line"></span>
+                            </div>
+                            <div class="pipeline-step">
+                                <span class="step-num">05</span>
+                                <span class="step-title">ACTIONABLE DECISION</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Philosophy Sub-section -->
+                <div class="philosophy-wrapper">
+                    <h3 class="sub-heading">How I approach data</h3>
+                    <div class="philosophy-grid">
+                        <div class="philosophy-card" data-step="1">
+                            <span class="p-num">01</span>
+                            <h4>Collect</h4>
+                            <p>Understand where the data comes from and what business reality it represents.</p>
+                        </div>
+                        <div class="philosophy-card" data-step="2">
+                            <span class="p-num">02</span>
+                            <h4>Clean</h4>
+                            <p>Validate, transform, and prepare data for reliable, reproducible analysis.</p>
+                        </div>
+                        <div class="philosophy-card" data-step="3">
+                            <span class="p-num">03</span>
+                            <h4>Explore</h4>
+                            <p>Find patterns, anomalies, relationships, and meaningful underlying metrics.</p>
+                        </div>
+                        <div class="philosophy-card" data-step="4">
+                            <span class="p-num">04</span>
+                            <h4>Visualize</h4>
+                            <p>Turn complex multi-variable information into intuitive visual stories.</p>
+                        </div>
+                        <div class="philosophy-card" data-step="5">
+                            <span class="p-num">05</span>
+                            <h4>Communicate</h4>
+                            <p>Translate technical findings into direct recommendations that support key decisions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Toolkit / Skills Section -->
+        <section id="skills" class="section-padding bg-alt">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-num">02 / TOOLKIT</span>
+                    <h2 class="section-title">Tools I use to make <span class="serif-accent">data useful.</span></h2>
+                </div>
+                
+                <div class="skills-grid">
+                    <div class="skill-category-card">
+                        <div class="category-header">
+                            <i data-lucide="database"></i>
+                            <h3>DATA ANALYTICS</h3>
+                        </div>
+                        <ul class="skill-tag-list">
+                            <li>Python</li>
+                            <li>Pandas</li>
+                            <li>NumPy</li>
+                            <li>Matplotlib</li>
+                            <li>SQL</li>
+                            <li>EDA</li>
+                            <li>Data Cleaning</li>
+                            <li>Data Validation</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category-card">
+                        <div class="category-header">
+                            <i data-lucide="bar-chart-3"></i>
+                            <h3>BUSINESS INTELLIGENCE</h3>
+                        </div>
+                        <ul class="skill-tag-list">
+                            <li>Power BI</li>
+                            <li>DAX</li>
+                            <li>Advanced Excel</li>
+                            <li>Pivot Tables</li>
+                            <li>Power Query</li>
+                            <li>XLOOKUP</li>
+                            <li>INDEX-MATCH</li>
+                            <li>Dynamic Arrays</li>
+                            <li>Dashboards</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category-card">
+                        <div class="category-header">
+                            <i data-lucide="map-pin"></i>
+                            <h3>DATA VISUALIZATION</h3>
+                        </div>
+                        <ul class="skill-tag-list">
+                            <li>Power BI</li>
+                            <li>Excel</li>
+                            <li>Leaflet.js</li>
+                            <li>OpenStreetMap</li>
+                            <li>Looker Studio</li>
+                            <li>Streamlit</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category-card">
+                        <div class="category-header">
+                            <i data-lucide="cpu"></i>
+                            <h3>OTHER & TOOLS</h3>
+                        </div>
+                        <ul class="skill-tag-list">
+                            <li>Machine Learning</li>
+                            <li>Azure ML Studio</li>
+                            <li>Git</li>
+                            <li>RPA</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="work" class="section-padding">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-num">03 / SELECTED WORK</span>
+                    <h2 class="section-title">Where data becomes <span class="serif-accent">a story.</span></h2>
+                </div>
+
+                <div class="projects-list">
+                    <!-- Project 01 -->
+                    <article class="project-card" data-project="1">
+                        <div class="project-meta">
+                            <span class="project-num">01</span>
+                            <span class="project-category">Python / Machine Learning / Data Analytics</span>
+                        </div>
+                        <div class="project-body">
+                            <div class="project-info">
+                                <h3 class="project-title">Healthcare Readmission Risk & What-If Simulator</h3>
+                                <p class="project-desc">
+                                    Developed an interactive system to assess patient readmission risk using clinical and hospital encounter features. Built what-if simulations and cohort visualizations to compare risk scenarios and identify high-risk patient profiles.
+                                </p>
+                                <div class="project-tech">
+                                    <span>Python</span><span>Machine Learning</span><span>Data Analytics</span><span>Streamlit</span>
+                                </div>
+                                <a href="https://health-project-nwrbjzevcugx9wmrmszdp9byrohit.streamlit.app/" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
+                                    <span>Live App</span>
+                                    <i data-lucide="external-link"></i>
+                                </a>
+                            </div>
+                            <div class="project-visual-preview">
+                                <div class="workflow-preview">
+                                    <div class="badge-conceptual">Interactive Streamlit App</div>
+                                    <div class="flow-nodes">
+                                        <div class="node">Clinical Features</div>
+                                        <div class="node-arrow">→</div>
+                                        <div class="node">Risk Model</div>
+                                        <div class="node-arrow">→</div>
+                                        <div class="node">What-If Simulation</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 02 -->
+                    <article class="project-card" data-project="2">
+                        <div class="project-meta">
+                            <span class="project-num">02</span>
+                            <span class="project-category">SQL / Power BI / Data Analytics</span>
+                        </div>
+                        <div class="project-body">
+                            <div class="project-info">
+                                <h3 class="project-title">Indian E-Commerce Sales & Insights Analytics</h3>
+                                <p class="project-desc">
+                                    Architected a relational SQL database schema for 1,250 transactions across major Indian cities and built an interactive Power BI dashboard using DAX, KPI cards, and geographic bubble maps to analyze nationwide revenue patterns.
+                                </p>
+                                <div class="project-tech">
+                                    <span>SQL</span><span>Power BI</span><span>DAX</span><span>Excel</span><span>Data Analytics</span>
+                                </div>
+                                <button class="btn btn-outline btn-sm open-modal-btn" data-target="modal-1">
+                                    <span>View Case Study</span>
+                                    <i data-lucide="arrow-up-right"></i>
+                                </button>
+                            </div>
+                            <div class="project-visual-preview">
+                                <div class="visual-kpi-row">
+                                    <div class="v-kpi">
+                                        <span class="v-title">SCHEMA</span>
+                                        <span class="v-val">Relational SQL</span>
+                                    </div>
+                                    <div class="v-kpi">
+                                        <span class="v-title">VOLUME</span>
+                                        <span class="v-val">1,250 Rows</span>
+                                    </div>
+                                </div>
+                                <div class="mock-chart-container">
+                                    <div class="badge-conceptual">Interactive concept preview</div>
+                                    <canvas id="project1Chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 03 -->
+                    <article class="project-card" data-project="3">
+                        <div class="project-meta">
+                            <span class="project-num">03</span>
+                            <span class="project-category">Geospatial Analytics / JavaScript</span>
+                        </div>
+                        <div class="project-body">
+                            <div class="project-info">
+                                <h3 class="project-title">Traffic Mortality Hotspot Analysis</h3>
+                                <p class="project-desc">
+                                    Developed an interactive heatmap visualization using Leaflet.js and OpenStreetMap/CARTO tiles to identify high-risk traffic accident clusters across urban regions for targeted road safety interventions.
+                                </p>
+                                <div class="project-tech">
+                                    <span>Leaflet.js</span><span>OpenStreetMap</span><span>CARTO</span><span>Geospatial Analysis</span><span>JavaScript</span>
+                                </div>
+                                <button class="btn btn-outline btn-sm open-modal-btn" data-target="modal-2">
+                                    <span>View Case Study</span>
+                                    <i data-lucide="arrow-up-right"></i>
+                                </button>
+                            </div>
+                            <div class="project-visual-preview">
+                                <div class="geo-mock-box">
+                                    <div class="badge-conceptual">Interactive spatial preview</div>
+                                    <div class="geo-grid-bg">
+                                        <div class="hotspot hs-1"></div>
+                                        <div class="hotspot hs-2"></div>
+                                        <div class="hotspot hs-3"></div>
+                                    </div>
+                                    <div class="geo-overlay">
+                                        <span>Cluster Density: Urban Hubs</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 04 -->
+                    <article class="project-card" data-project="4">
+                        <div class="project-meta">
+                            <span class="project-num">04</span>
+                            <span class="project-category">Machine Learning / Business Intelligence</span>
+                        </div>
+                        <div class="project-body">
+                            <div class="project-info">
+                                <h3 class="project-title">Smart Health Monitoring & Disease Predictor</h3>
+                                <p class="project-desc">
+                                    Engineered an AI-driven healthcare application framework using Machine Learning, Python, MySQL, and Power BI to predict potential health risks based on user symptoms and physiological metrics.
+                                </p>
+                                <div class="project-tech">
+                                    <span>Python</span><span>Machine Learning</span><span>MySQL</span><span>Power BI</span>
+                                </div>
+                                <button class="btn btn-outline btn-sm open-modal-btn" data-target="modal-3">
+                                    <span>View Case Study</span>
+                                    <i data-lucide="arrow-up-right"></i>
+                                </button>
+                            </div>
+                            <div class="project-visual-preview">
+                                <div class="workflow-preview">
+                                    <div class="badge-conceptual">Conceptual workflow</div>
+                                    <div class="flow-nodes">
+                                        <div class="node">User Metrics</div>
+                                        <div class="node-arrow">→</div>
+                                        <div class="node">ML Processing</div>
+                                        <div class="node-arrow">→</div>
+                                        <div class="node">Risk Matrix</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience & Education -->
+        <section id="experience" class="section-padding bg-alt">
+            <div class="container">
+                <div class="grid-2-col">
+                    <!-- Experience -->
+                    <div>
+                        <div class="section-header">
+                            <span class="section-num">04 / EXPERIENCE</span>
+                            <h2 class="section-title">Work <span class="serif-accent">History</span></h2>
+                        </div>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-content">
+                                    <span class="time-period">Aug 2025 – Sept 2025</span>
+                                    <h3 class="role-title">Data Analytics Intern</h3>
+                                    <span class="company-name">TechnoHacks Solutions Pvt. Ltd.</span>
+                                    <ul class="timeline-bullets">
+                                        <li>Executed end-to-end data processing workflows, collecting, cleaning, and validating raw data using Python and SQL.</li>
+                                        <li>Performed EDA on real-world datasets to identify key patterns and actionable business metrics.</li>
+                                        <li>Designed dynamic Power BI and Excel dashboards to streamline executive reporting and automated recurring insight delivery.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Education & Certifications -->
+                    <div>
+                        <div class="section-header">
+                            <span class="section-num">05 / ACADEMICS</span>
+                            <h2 class="section-title">Education & <span class="serif-accent">Certificates</span></h2>
+                        </div>
+                        <div class="edu-card">
+                            <span class="time-period">2024 – 2027</span>
+                            <h3 class="role-title">Bachelor of Computer Applications (BCA)</h3>
+                            <p class="company-name">SRM Institute of Science and Technology</p>
+                            <p class="edu-spec">Specialization in Data Science | <strong>CGPA: 8.39 / 10</strong></p>
+                        </div>
+
+                        <h3 class="sub-heading" style="margin-top: 2.5rem;">Certifications</h3>
+                        <div class="cert-grid">
+                            <div class="cert-card">
+                                <i data-lucide="award"></i>
+                                <div>
+                                    <h4>Data Science Essentials with Python</h4>
+                                    <span>Cisco</span>
+                                </div>
+                            </div>
+                            <div class="cert-card">
+                                <i data-lucide="award"></i>
+                                <div>
+                                    <h4>Data Fundamentals</h4>
+                                    <span>IBM</span>
+                                </div>
+                            </div>
+                            <div class="cert-card">
+                                <i data-lucide="award"></i>
+                                <div>
+                                    <h4>Introduction to Modern AI</h4>
+                                    <span>Cisco</span>
+                                </div>
+                            </div>
+                            <div class="cert-card">
+                                <i data-lucide="award"></i>
+                                <div>
+                                    <h4>GenAI Powered Data Analytics</h4>
+                                    <span>Tata Group (Job Simulation)</span>
+                                </div>
+                            </div>
+                            <div class="cert-card">
+                                <i data-lucide="award"></i>
+                                <div>
+                                    <h4>Google Analytics Certificate</h4>
+                                    <span>Coursera</span>
+                                </div>
+                            </div>
+                            <div class="cert-card">
+                                <i data-lucide="award"></i>
+                                <div>
+                                    <h4>Data Science with Python</h4>
+                                    <span>Skill India</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Signature Data x Art Concept Section -->
+        <section class="section-padding data-art-section">
+            <div class="container">
+                <div class="data-art-box">
+                    <div class="data-art-header">
+                        <span class="section-num">CONCEPT</span>
+                        <h2 class="section-title">Two ways of seeing <span class="serif-accent">the world.</span></h2>
+                    </div>
+                    <div class="grid-2-col data-art-content">
+                        <div class="art-side side-data">
+                            <h3>DATA</h3>
+                            <p class="art-keywords">Patterns. Relationships. Evidence. Decisions.</p>
+                            <p>Structure allows us to process thousands of data points without getting lost in randomness.</p>
+                        </div>
+                        <div class="art-divider">
+                            <span>×</span>
+                        </div>
+                        <div class="art-side side-art">
+                            <h3>ART</h3>
+                            <p class="art-keywords">Observation. Composition. Perspective. Storytelling.</p>
+                            <p>Visual presentation allows humans to connect with findings and act upon them instantly.</p>
+                        </div>
+                    </div>
+                    <blockquote class="signature-quote">
+                        "Analytics gives me structure. Art gives me perspective."
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+
+        <!-- Journey Section -->
+        <section id="journey" class="section-padding">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-num">06 / JOURNEY</span>
+                    <h2 class="section-title">Trajectory & <span class="serif-accent">Growth</span></h2>
+                </div>
+                <div class="journey-track">
+                    <div class="journey-node">
+                        <span class="j-year">2024</span>
+                        <h4>Started BCA in Data Science</h4>
+                        <p>Began foundational study in algorithms, statistics, SQL, and core analytical methods at SRM Institute.</p>
+                    </div>
+                    <div class="journey-node">
+                        <span class="j-year">2025</span>
+                        <h4>Data Analytics Internship</h4>
+                        <p>Applied Python, SQL, and Power BI tools to real-world operational datasets at TechnoHacks Solutions.</p>
+                    </div>
+                    <div class="journey-node">
+                        <span class="j-year">2025–2026</span>
+                        <h4>Advanced Analytics & Spatial Work</h4>
+                        <p>Developed geospatial mapping tools, sales analytical dashboards, and predictive ML application frameworks.</p>
+                    </div>
+                    <div class="journey-node j-current">
+                        <span class="j-year">Present</span>
+                        <h4>Seeking Internship Opportunities</h4>
+                        <p>Expanding BI pipelines, refining mathematical visual storytelling, and open to team contributions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section-padding bg-alt">
+            <div class="container">
+                <div class="contact-card">
+                    <span class="section-num">07 / CONTACT</span>
+                    <h2 class="contact-heading">Let's turn data into <br><span class="serif-accent">something useful.</span></h2>
+                    <p class="contact-sub">
+                        Looking for a Data Analyst internship where I can learn, contribute, and solve real-world problems with data.
+                    </p>
+                    
+                    <div class="contact-actions">
+                        <a href="mailto:yadavrohit8472@gmail.com" class="btn btn-primary">
+                            <i data-lucide="mail"></i>
+                            <span>Email Me</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/rohityadav84" target="_blank" class="btn btn-outline">
+                            <i data-lucide="linkedin"></i>
+                            <span>LinkedIn</span>
+                        </a>
+                        <a href="https://github.com/rohitkumarr11" target="_blank" class="btn btn-outline">
+                            <i data-lucide="github"></i>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="assets/resume/Rohit_Kumar_Resume.pdf" target="_blank" class="btn btn-secondary">
+                            <i data-lucide="file-text"></i>
+                            <span>Download Resume</span>
+                        </a>
+                    </div>
+                    
+                    <div class="direct-email-display">
+                        <span>Direct contact:</span>
+                        <a href="mailto:yadavrohit8472@gmail.com">yadavrohit8472@gmail.com</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div>
+                <span class="footer-brand">ROHIT KUMAR</span>
+                <p class="footer-sub">Data Analyst | Data Science Undergraduate</p>
+            </div>
+            <p class="footer-quote">"Built with data, curiosity & a little creativity."</p>
+            <div class="footer-copy">
+                &copy; <span id="year"></span> Rohit Kumar. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals for Projects -->
+    <div class="modal-backdrop" id="modal-backdrop" aria-hidden="true">
+        <!-- Modal 1 -->
+        <div class="modal-box" id="modal-1" role="dialog" aria-modal="true" aria-labelledby="m1-title">
+            <button class="modal-close" aria-label="Close Modal">&times;</button>
+            <span class="meta-label">CASE STUDY</span>
+            <h3 id="m1-title" class="modal-title">Indian E-Commerce Sales & Insights Analytics</h3>
+            <div class="modal-content-grid">
+                <div>
+                    <h4>Overview</h4>
+                    <p>Designed a structured database and analytical report to evaluate order trends, geographical revenue distribution, and payment patterns across top Indian metropolitan cities.</p>
+                    <h4>Problem & Approach</h4>
+                    <p>Raw multi-city sales entries needed normalization and dynamic aggregation to allow stakeholders to filter performance by location, month, and fulfillment mode.</p>
+                </div>
+                <div>
+                    <h4>Key Tools</h4>
+                    <ul class="modal-list">
+                        <li>SQL (Schema design, analytical query processing)</li>
+                        <li>Power BI (DAX metrics, geographic maps)</li>
+                        <li>Advanced Excel (Data cleaning, validation)</li>
+                    </ul>
+                    <h4>Takeaway</h4>
+                    <p>Interactive reporting reduces manual slide creation and gives teams immediate clarity on city-level operational performance.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal 2 -->
+        <div class="modal-box" id="modal-2" role="dialog" aria-modal="true" aria-labelledby="m2-title">
+            <button class="modal-close" aria-label="Close Modal">&times;</button>
+            <span class="meta-label">CASE STUDY</span>
+            <h3 id="m2-title" class="modal-title">Traffic Mortality Hotspot Analysis</h3>
+            <div class="modal-content-grid">
+                <div>
+                    <h4>Overview</h4>
+                    <p>A geospatial visual mapping tool focused on plotting location coordinates of traffic incidents to assist urban planners in identifying high-density risk areas.</p>
+                    <h4>Problem & Approach</h4>
+                    <p>Tabular crash logs make identifying spatial density patterns difficult. By converting coordinate metrics to dynamic density heatmaps, spatial risks become visually intuitive.</p>
+                </div>
+                <div>
+                    <h4>Key Tools</h4>
+                    <ul class="modal-list">
+                        <li>Leaflet.js (Map rendering & dynamic layering)</li>
+                        <li>OpenStreetMap & CARTO Tiles</li>
+                        <li>JavaScript (Geospatial parsing)</li>
+                    </ul>
+                    <h4>Takeaway</h4>
+                    <p>Geospatial analysis allows safety interventions to be targeted precisely where incidents recur most frequently.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal 3 -->
+        <div class="modal-box" id="modal-3" role="dialog" aria-modal="true" aria-labelledby="m3-title">
+            <button class="modal-close" aria-label="Close Modal">&times;</button>
+            <span class="meta-label">CASE STUDY</span>
+            <h3 id="m3-title" class="modal-title">Smart Health Monitoring & Disease Predictor</h3>
+            <div class="modal-content-grid">
+                <div>
+                    <h4>Overview</h4>
+                    <p>Conceptual architecture demonstrating how patient risk factors and physiological indicators can be channeled through ML models and surfaced in dynamic dashboards.</p>
+                    <h4>Problem & Approach</h4>
+                    <p>Multi-parameter diagnostic data requires clear structured pipelines to transform raw metrics into categorized risk indicators for analytical evaluation.</p>
+                </div>
+                <div>
+                    <h4>Key Tools</h4>
+                    <ul class="modal-list">
+                        <li>Python & Machine Learning Libraries</li>
+                        <li>MySQL (Relational data store)</li>
+                        <li>Power BI (Executive visual summary)</li>
+                    </ul>
+                    <h4>Takeaway</h4>
+                    <p>Combining machine learning outputs with Business Intelligence dashboards provides intuitive visual summaries of risk distribution.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
