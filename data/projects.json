@@ -1,10 +1,15 @@
 {
   "items": [
     {
-      "title": "Sample Analytics Project",
-      "description": "A initial data analysis project using Python and SQL.",
-      "tech_stack": ["Python", "SQL", "Pandas"],
-      "link": "https://github.com/rohitkumarr11"
+      "title": "The Endless Scroll — Interactive Digital Behavior Analysis",
+      "description": "An interactive data science case study uncovering how digital habits, doomscrolling, screen time, and sleep patterns impact our daily lives across two datasets ($N = 7,500$ and $N = 1,000$).What Built It:Python Analysis & ML: Applied statistical methods, Spearman rank correlations, K-Means clustering ($k=4$), Logistic Regression, and Random Forest models ($F1 = 0.955$) to uncover core behavioral signals.SQL & Data Pipeline: Handled data cleaning, feature engineering, and exploratory analysis across primary ($N = 7,500$) and cross-country ($N = 1,000$) datasets.Pandas Data Science: Built custom behavior profiles, run ANOVA tests, and structured data pipelines for interactive exploration.Key Discoveries:7.5 Hours Daily: Average screen time per respondent, with over 66% spending more than 6 hours on their devices daily.4 Distinct Profiles: Unsupervised clustering revealed distinct usage patterns—from notification checkers to heavy gamers.Doomscrolling & Sleep: The cross-country case study confirmed that late-night scroll sessions strongly correlate with longer sleep latency and elevated anxiety levels.",
+      "tech_stack": [
+        "Python",
+        "SQL",
+        "Pandas",
+        "Data Analysis"
+      ],
+      "link": "https://rohitkumarr11.github.io/doomscrolling-Analysis/"
     }
   ]
 }
