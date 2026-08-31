@@ -77,7 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
         height = canvas.height = window.innerHeight;
     });
 
-    // Balanced density & softer movement velocity
     const numParticles = Math.floor((width * height) / 18000);
     const particles = [];
 
@@ -103,13 +102,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (p.x < 0 || p.x > width) p.vx *= -1;
             if (p.y < 0 || p.y > height) p.vy *= -1;
 
-            // Soft light nodes matching palette
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
             ctx.fillStyle = 'rgba(43, 84, 126, 0.3)';
             ctx.fill();
 
-            // Inter-node connection lines
             for (let j = i + 1; j < particles.length; j++) {
                 let p2 = particles[j];
                 let dx = p.x - p2.x;
@@ -126,7 +123,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // Interactive mouse connections
             let mouseDx = p.x - mouseX;
             let mouseDy = p.y - mouseY;
             let mouseDist = Math.sqrt(mouseDx * mouseDx + mouseDy * mouseDy);
@@ -240,7 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
     counters.forEach(counter => counterObserver.observe(counter));
 
     // ==========================================
-    // 7. CHARTS (HERO & PROJECT 02 PREVIEW)
+    // 7. CHARTS (HERO & PROJECT PREVIEWS)
     // ==========================================
     const heroCtx = document.getElementById('heroChart');
     if (heroCtx && typeof Chart !== 'undefined') {
@@ -339,4 +335,29 @@ document.addEventListener('DOMContentLoaded', () => {
     if (yearSpan) {
         yearSpan.textContent = new Date().getFullYear();
     }
+
+    // ==========================================
+    // 10. DYNAMIC PROJECTS FROM JSON (CMS)
+    // ==========================================
+    fetch('./data/projects.json')
+        .then(response => {
+            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+            return response.json();
+        })
+        .then(data => {
+            const projectContainer = document.querySelector('.project-grid');
+            if (!projectContainer) return;
+
+            projectContainer.innerHTML = data.items.map(project => `
+                <div class="project-card">
+                    <h3>${project.title}</h3>
+                    <p>${project.description}</p>
+                    <div class="tags">
+                        ${project.tech_stack.map(tech => `<span>${tech}</span>`).join('')}
+                    </div>
+                    <a href="${project.link}" target="_blank" rel="noopener noreferrer">View Project</a>
+                </div>
+            `).join('');
+        })
+        .catch(err => console.error("Failed to load project JSON:", err));
 });
