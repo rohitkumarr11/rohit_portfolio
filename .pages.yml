@@ -1,0 +1,47 @@
+media:
+  input: "assets/images"
+  output: "/assets/images"
+
+content:
+  - name: "skills"
+    label: "Skills & Tools"
+    type: "file"
+    path: "data/skills.json"
+    fields:
+      - name: "categories"
+        label: "Skill Categories"
+        type: "object"
+        list: true
+        fields:
+          - name: "title"
+            label: "Category Name"
+            type: "string"
+          - name: "skills"
+            label: "Skills List"
+            type: "string"
+            list: true
+
+  - name: "projects"
+    label: "Projects"
+    type: "file"
+    path: "data/projects.json"
+    fields:
+      - name: "items"
+        label: "Project List"
+        type: "object"
+        list: true
+        fields:
+          - name: "title"
+            label: "Project Title"
+            type: "string"
+          - name: "description"
+            label: "Description"
+            type: "string"
+          - name: "tech_stack"
+            label: "Tech Stack"
+            type: "string"
+            list: true
+          - name: "link"
+            label: "Project Link"
+            type: "string"
+            
