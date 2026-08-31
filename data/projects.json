@@ -1,0 +1,10 @@
+{
+  "items": [
+    {
+      "title": "Sample Analytics Project",
+      "description": "A initial data analysis project using Python and SQL.",
+      "tech_stack": ["Python", "SQL", "Pandas"],
+      "link": "https://github.com/rohitkumarr11"
+    }
+  ]
+}
