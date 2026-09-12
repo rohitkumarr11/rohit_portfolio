@@ -1,17 +1,44 @@
-# Rohit Kumar — Data Analyst Portfolio (DATA × ART)
+<div align="center">
 
-This portfolio website presents the work of Rohit Kumar, a Data Science undergraduate specializing in data analytics, database architecture, dynamic dashboards, and geospatial visualizations.
+# 📊 DATA × ART
+### *Rohit Kumar — Data Analyst Portfolio*
 
-## Concept & Visual Identity
-The core creative concept is **DATA × ART**, blending statistical precision with minimal, editorial design aesthetics.
+[![GitHub Pages](https://img.shields.io/badge/Live_Demo-GitHub_Pages-2ea44f?style=for-the-badge&logo=github)](https://rohitkumarr11.github.io/rohit_portfolio/)
+[![Portfolio](https://img.shields.io/badge/Role-Data_Analyst-blue?style=for-the-badge)](https://github.com/rohitkumarr11)
 
-## Local Setup Instructions
-1. Clone or download this repository.
-2. Replace placeholders in `assets/resume/Rohit_Kumar_Resume.pdf` and `assets/images/profile.jpg` with your real files.
-3. Open `index.html` directly in your browser.
+<p align="center">
+  A fusion of statistical precision and minimal, editorial design aesthetics.
+</p>
 
-## Deployment Instructions (GitHub Pages)
-1. Commit all files to a public GitHub repository.
-2. Go to your repository settings on GitHub: **Settings -> Pages**.
-3. Under **Build and deployment -> Branch**, select `main` branch and root `/` folder.
-4. Click **Save**. Your site will be live within 1 to 2 minutes at `https://<your-username>.github.io/`.
+---
+
+</div>
+
+## 🎯 Concept & Visual Identity
+
+The core creative concept behind this portfolio is **DATA × ART**. It bridges the gap between raw analytical rigor and aesthetic design—transforming complex datasets into clear, compelling, and visual narratives.
+
+* **Statistical Precision:** Advanced analytics, robust database architectures, and accurate geospatial modeling.
+* **Editorial Design:** Minimalist layout, modern typography, and intuitive UX/UI data visualizers.
+
+---
+
+## 🛠️ Tech Stack & Skills
+
+| Category | Skills & Tools |
+| :--- | :--- |
+| **Data Analytics & Viz** | Python, R, SQL, Dynamic Dashboards, Geospatial Analytics |
+| **Database Architecture** | PostgreSQL, MySQL, Schema Design, Data Modeling |
+| **Web & Interactive** | HTML5, CSS3, JavaScript, GitHub Pages |
+
+---
+
+## 📁 Repository Structure
+
+```text
+rohit_portfolio/
+├── 📂 assets/        # Visual elements, custom styling assets, and graphics
+├── 📂 data/          # Portfolio datasets and structured analytical files
+├── 📄 index.html     # Core application structure & visual interface
+├── 📄 script.js      # Dynamic interactivity, charts, and visualizations
+└── 📄 style.css      # Editorial styling, typography, and theme definitions
